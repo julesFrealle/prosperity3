@@ -1,52 +1,68 @@
-# 🏝️ Musashi's Island
+# 🏝️ Musashi's Island: IMC Prosperity 3
 
-## IMC Prosperity 3 Algorithmic Trading Competition
+### 🏆 29th out of 12,620 teams worldwide · 🇫🇷 2nd in France
 
-### 29th out of 12,620 teams worlwide, 2nd in France
+Our team's submission to **IMC Prosperity 3 (2025)**, IMC Trading's 15-day global algorithmic and manual trading competition. Each round adds new products to trade on a simulated exchange. Our Python bot posts orders against the order book every tick, under strict position limits.
 
-> *"You must understand that there is more than one path to the top of the mountain."*  
-> — **Miyamoto Musashi**
+> *"You must understand that there is more than one path to the top of the mountain."* (Miyamoto Musashi)
 
-Welcome to **Musashi's Island**, our submission for the **IMC Prosperity Trading Challenge 2025**.
-
-This project is named in honor of **Miyamoto Musashi** — the undefeated samurai, philosopher, and author of *The Book of Five Rings*. Like Musashi, we combine clarity of mind, adaptability, and discipline in the face of battle — or in our case, the fast-paced world of algorithmic trading.
-
-> *"Perceive that which cannot be seen with the eye."*
-
-Musashi lived by principles of constant improvement, strategy without hesitation, and seeing beyond the immediate. We carry that mindset into our code, our teamwork, and our approach to every market.
-
----
+<p align="center">
+  <img src="assets/final_result.jpg" width="800" alt="Final result: 29th, 956,678 SeaShells">
+</p>
 
 ## 📈 Results
 
-We finished 29th worldwide out of 12,620 teams, and 2nd in France.
+| Leaderboard | Rank |
+|---|---|
+| **Overall** | **#29** / 12,620 teams |
+| Algorithmic | #33 |
+| Manual | #112 |
+| France | **#2** |
 
-![Result](result.png)
+Final PnL: **956,678 SeaShells**.
 
----
+## 🧠 Strategies at a glance
 
-## 👨‍👩‍👧‍👦 Our Team
+| Product family | Approach |
+|---|---|
+| `RAINFOREST_RESIN` | Market making around a fixed fair value (10,000), with spreads that adapt to order-book depth |
+| `KELP` | Mean reversion on a fair value from the filtered order book, with filters against adverse selection |
+| `SQUID_INK` | SMA plus mean reversion triggered by volatility, with aggressiveness that adjusts to the market |
+| `PICNIC_BASKET1/2`, `CROISSANTS`, `JAMS`, `DJEMBES` | Statistical arbitrage of each basket against its synthetic replica, using z-scores of the spread |
+| `VOLCANIC_ROCK` + vouchers | Black–Scholes implied volatility, trading the IV smile, delta hedging |
+| `MAGNIFICENT_MACARONS` | Arbitrage between islands, net of transport fees, tariffs and conversion limits |
+| Manual rounds | Brute-force search for the best currency-conversion path (R1); a convex portfolio optimisation with `cvxpy` on news sentiment (R5) |
 
-We are a group of five students from the Bachelor of Science program at École Polytechnique:
+## 🗂️ Repository structure
 
-- **Jules Frealle** [GitHub](https://github.com/julesFrealle) • [LinkedIn](https://www.linkedin.com/in/jules-frealle/)
-- **Emeric Payer** [GitHub](https://github.com/emeric7287) • [LinkedIn](https://www.linkedin.com/in/emeric-payer-754413265/)
-- **Youssef Nakhla** [GitHub](https://github.com/YoussefNakhla) • [LinkedIn](https://www.linkedin.com/in/youssef-nakhla-43963126b/)
-- **Mael Kupperschmitt** [GitHub](https://github.com/maelkupp) • [LinkedIn](https://www.linkedin.com/in/mael-kupperschmitt-84b40b294/)
-- **Iyad El Khoury** [GitHub](https://github.com/danido05)
+```
+├── round_1/ … round_5/     # final algorithm submitted each round (+ manual-round solvers)
+│   └── roundX_final.py     # the Trader class uploaded to the Prosperity platform
+├── research/               # Jupyter notebooks used to find the signals
+│   ├── rounds_1_2_analysis.ipynb
+│   ├── baskets_croissants_jams.ipynb
+│   ├── volcanic_rock_vouchers.ipynb
+│   ├── round_3_hint.ipynb
+│   ├── round_5_analysis.ipynb
+│   └── trades_round5_analysis.ipynb
+├── data/                   # price, trade & observation data released for each round
+└── assets/
+```
 
----
+`round_5/round5_final.py` is the complete final bot. It combines every strategy above in one `Trader` class.
 
 ## 🛠️ Usage
 
 ```bash
-git clone git@gitlab.binets.fr:emeric.payer/musashi_island.git
-code musashi_island
+git clone https://github.com/julesFrealle/prosperity3.git
+cd prosperity3
+pip install prosperity3bt          # community backtester
+prosperity3bt round_5/round5_final.py 5
 ```
 
----
+Open the notebooks in `research/` with Jupyter. They read their data from `../data/`.
 
-## 📖 Round Descriptions
+## 📖 Round-by-round strategy
 
 ### 1️⃣ Round 1
 
@@ -131,7 +147,14 @@ code musashi_island
 
 ---
 
-> *"From one thing, know ten thousand things."*  
+## 👨‍👩‍👧‍👦 Team
 
-— With discipline and elegance,  
-Team MUSASHI
+Five students from the Bachelor of Science at **École Polytechnique**:
+
+- **Jules Fréalle**: [GitHub](https://github.com/julesFrealle) · [LinkedIn](https://www.linkedin.com/in/jules-frealle/)
+- **Emeric Payer**: [GitHub](https://github.com/emeric7287) · [LinkedIn](https://www.linkedin.com/in/emeric-payer-754413265/)
+- **Youssef Nakhla**: [GitHub](https://github.com/YoussefNakhla) · [LinkedIn](https://www.linkedin.com/in/youssef-nakhla-43963126b/)
+- **Mael Kupperschmitt**: [GitHub](https://github.com/maelkupp) · [LinkedIn](https://www.linkedin.com/in/mael-kupperschmitt-84b40b294/)
+- **Iyad El Khoury**: [GitHub](https://github.com/danido05)
+
+> *"From one thing, know ten thousand things."* (Team MUSASHI)
